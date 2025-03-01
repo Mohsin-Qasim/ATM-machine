@@ -30,25 +30,38 @@ class Bank {
     }
    }
     }
+    let myaccount = new Bank(1234,5000)
 
   
-    function atmMachine(){
+    function checkBalance(){
         let pincode = Number(document.getElementById("pincode").value);
         let result = document.getElementById("result")
-        let balanceAmount = Number(document.getElementById("balanceAmount").value)
-
-
-        let myaccount = new Bank(1234,5000)
         let messsage = myaccount.getBalance(pincode)
-        let withdramount = myaccount.withdraw(pincode,balanceAmount)
-        result.innerHTML = `${messsage} <br> ${withdramount ||""}`
+        result.innerHTML = messsage
 console.log(myaccount.withdraw(1234,500));
 console.log(myaccount.withdraw(1234,4500));
 
 
 
     }
+    function withdrawAmount(){
+        let pincode = Number(document.getElementById("pincode").value);
+        let balanceAmount = Number(document.getElementById("balanceAmount").value)
+        let withdramount = myaccount.withdraw(pincode,balanceAmount)
+        let result = document.getElementById("result")
+result.textContent = withdramount
+    }
+
+document.getElementById("withdraw").addEventListener("click",withdrawAmount)
+    document.querySelector("#checkBalance").addEventListener("click" , checkBalance)
 
 
 
-    document.querySelector(".btn").addEventListener("click" , atmMachine)
+
+
+
+
+
+
+
+
