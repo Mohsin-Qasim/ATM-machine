@@ -14,6 +14,9 @@ class Bank {
             return `Your pin is incorrect`
         }
     }
+    getPin() {
+        return this.#pin;
+    }
 
    withdraw(pin , amount){
 
@@ -27,6 +30,7 @@ class Bank {
     else{
         this.#amount -=amount   
         return `Withdraw Successfull ! Your new balance is ${this.#amount}`
+        
     }
    }
     }
@@ -38,18 +42,13 @@ class Bank {
         let result = document.getElementById("result")
         let messsage = myaccount.getBalance(pincode)
         result.innerHTML = messsage
-console.log(myaccount.withdraw(1234,500));
-console.log(myaccount.withdraw(1234,4500));
-
-
-
     }
     function withdrawAmount(){
-        let pincode = Number(document.getElementById("pincode").value);
+        let withdrawpin = Number(document.getElementById("withdrawpin").value);
         let balanceAmount = Number(document.getElementById("balanceAmount").value)
-        let withdramount = myaccount.withdraw(pincode,balanceAmount)
-        let result = document.getElementById("result")
-result.textContent = withdramount
+        let withdramount = myaccount.withdraw(withdrawpin,balanceAmount)
+        let withdrawResult = document.getElementById("withdrawResult")
+        withdrawResult.textContent = withdramount
     }
 
 document.getElementById("withdraw").addEventListener("click",withdrawAmount)
@@ -58,9 +57,32 @@ document.getElementById("withdraw").addEventListener("click",withdrawAmount)
 
 
 
+class Saving extends Bank {
+    
+    constructor(pin , amount){
+    
+        super(pin,amount)
+    }
 
+    savingAcc(pin){
+        if (pin !==this.getPin()){
+           return `you r not eligible`   
+        }
+    else{
+        return `You'r Eligible`
+    }
 
+    }
+}
+let savingaccount = new Saving(12346)
+console.log(savingaccount.savingAcc(1234    ));
 
+function checkEligible(){
+    let savinPin = parseInt(document.getElementById("savinPin").value)
+    let eligiblity = document.getElementById("eligiblity")
+    eligiblity.textContent= savingaccount.savingAcc(savinPin)
+}
+document.getElementById("check").addEventListener("click",checkEligible)
 
 
 
